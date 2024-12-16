@@ -1,16 +1,29 @@
-.vercel
-.env
-node_modules
+# Dependency Files
+node_modules/
 *.lock
-.idea/
-coverage
-benchmarks
+yarn.lock
+package-lock.json
+
+# Logs
+*.log
+
+# Coverage and Benchmarks
+coverage/
+benchmarks/
+
+# Build and Deployment
+.vercel
 vercel_token
 
-# IDE
+# Local Configuration and Generated Files
+.DS_Store
+.env
+DOCKER_ENV
+docker_tag
+
+# IDE and Editor Configuration
+.idea/
 .vscode/*
 !.vscode/extensions.json
 !.vscode/settings.json
 *.code-workspace
-
-.vercel
