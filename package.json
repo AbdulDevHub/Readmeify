@@ -32,9 +32,22 @@
     "prepare": "husky",
     "lint": "npx eslint --max-warnings 0 \"./src/**/*.js\" \"./scripts/**/*.js\" \"./tests/**/*.js\" \"./api/**/*.js\" \"./themes/**/*.js\"",
     "bench": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.bench.config.js",
-    "type": "tsc --noEmit"
+    "type": "tsc --noEmit",
+    "start": "node .",
+    "dev": "ts-node src/index.ts",
+    "dev:watch": "ts-node-dev --respawn src/index.ts",
+    "clean": "rimraf dist/*",
+    "tsc": "tsc",
+    "build": "npm-run-all clean tsc ; ncc build dist0/index.js --license licenses.txt",
+    "check-types": "tsc --noEmit",
+    "eslint": "eslint src/**/*.ts",
+    "eslint:fix": "eslint src/**/*.ts --fix",
+    "code-quality": "npm-run-all eslint check-types",
+    "lint:fix": "npm-run-all eslint:fix check-types format",
+    "test-jest": "jest",
+    "test:coverage": "jest --collect-coverage"
   },
-  "author": "Anurag Hazra",
+  "author": "Abdul Hadi Khan",
   "license": "MIT",
   "devDependencies": {
     "@actions/core": "^1.10.1",
@@ -75,5 +88,26 @@
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "pre-commit": [
+    "test",
+    "lint:fix"
+  ],
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "ts"
+    ],
+    "transform": {
+      "^.+\\.(ts|js)$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "tsconfig.json"
+      }
+    },
+    "testMatch": [
+      "**/spec/*.(spec|test).(ts|js)"
+    ]
   }
 }
