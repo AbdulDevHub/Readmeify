@@ -3,5 +3,3 @@ node_modules
 *.md
 coverage
 .vercel
-/dist
-
