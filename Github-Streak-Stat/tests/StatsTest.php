@@ -6,15 +6,15 @@ use PHPUnit\Framework\TestCase;
 
 // load functions
 require_once dirname(__DIR__, 1) . "/vendor/autoload.php";
-require_once "src/stats.php";
+require_once "api/stats.php";
 
 // load .env
 $dotenv = \Dotenv\Dotenv::createImmutable(dirname(__DIR__, 1));
 $dotenv->safeLoad();
 
 // if environment variables are not loaded, display error
-if (!isset($_SERVER["TOKEN"])) {
-    $message = file_exists(dirname(__DIR__ . "../.env", 1))
+if (!isset($_ENV["TOKEN"])) {
+    $message = file_exists(dirname(__DIR__, 1) . "/.env")
         ? "Missing token in config. Check Contributing.md for details."
         : ".env was not found. Check Contributing.md for details.";
 
@@ -91,36 +91,6 @@ final class StatsTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Could not find a user with that name.");
         getContributionGraphs("help");
-    }
-
-    /**
-     * Test that an valid username can be accessed with whitelist
-     */
-    public function testValidUsernameWithWhitelist(): void
-    {
-        $_SERVER["WHITELIST"] = "DenverCoder1";
-        try {
-            $contributionGraphs = getContributionGraphs("DenverCoder1");
-            $this->assertIsArray($contributionGraphs);
-            $this->assertNotEmpty($contributionGraphs);
-        } finally {
-            unset($_SERVER["WHITELIST"]);
-        }
-    }
-
-    /**
-     * Test that an not whitelisted username returns 'not whitelisted' error
-     */
-    public function testNotWhitelistedUsername(): void
-    {
-        $_SERVER["WHITELIST"] = "DenverCoder1";
-        try {
-            $this->expectException(InvalidArgumentException::class);
-            $this->expectExceptionMessage("User not in whitelist.");
-            getContributionGraphs("help");
-        } finally {
-            unset($_SERVER["WHITELIST"]);
-        }
     }
 
     /**

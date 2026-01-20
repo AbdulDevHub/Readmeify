@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-require_once "whitelist.php";
-
 /**
  * Build a GraphQL query for a contribution graph
  *
@@ -123,10 +121,6 @@ function executeContributionGraphRequests(string $user, array $years): array
  */
 function getContributionGraphs(string $user, ?int $startingYear = null): array
 {
-    if (!isWhitelisted($user)) {
-        throw new InvalidArgumentException("User not in whitelist.", 403);
-    }
-
     // get the list of years the user has contributed and the current year's contribution graph
     $currentYear = intval(date("Y"));
     $responses = executeContributionGraphRequests($user, [$currentYear]);
@@ -169,11 +163,11 @@ function getGitHubTokens(): array
         return $GLOBALS["ALL_TOKENS"];
     }
     // find all tokens in environment variables
-    $tokens = isset($_SERVER["TOKEN"]) ? [$_SERVER["TOKEN"]] : [];
+    $tokens = isset($_ENV["TOKEN"]) ? [$_ENV["TOKEN"]] : [];
     $index = 2;
-    while (isset($_SERVER["TOKEN{$index}"])) {
+    while (isset($_ENV["TOKEN{$index}"])) {
         // add token to list
-        $tokens[] = $_SERVER["TOKEN{$index}"];
+        $tokens[] = $_ENV["TOKEN{$index}"];
         $index++;
     }
     // store for future use
