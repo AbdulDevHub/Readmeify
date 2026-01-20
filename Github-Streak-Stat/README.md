@@ -9,13 +9,6 @@
   and longest streak on your GitHub profile README
 </p>
 
-<p align="center">
-  <a href="https://github.com/search?q=extension%3Amd+%22github+readme+streak+stats+herokuapp%22&type=Code" alt="Users" title="Repo users">
-    <img src="https://freshidea.com/jonah/app/github-search-results/streak-stats"/></a>
-  <a href="https://discord.gg/fPrdqh3Zfu" alt="Discord" title="Dev Pro Tips Discussion & Support Server">
-    <img src="https://img.shields.io/discord/819650821314052106?color=7289DA&logo=discord&logoColor=white&style=for-the-badge"/></a>
-</p>
-
 ## ⚡ Quick setup
 
 1. Copy-paste the markdown below into your GitHub profile README
@@ -25,7 +18,7 @@
 [![GitHub Streak](https://streak-stats.demolab.com/?user=DenverCoder1)](https://git.io/streak-stats)
 ```
 
-3. Star the repo 😄
+1. Star the repo 😄
 
 ### Next Steps
 
@@ -180,15 +173,15 @@ Vercel is the recommended option for hosting the files since it is **free** and 
 
 [![][hspace]](#) [![Deploy with Vercel](https://i.imgur.com/Mb3VLCi.png)][verceldeploy]
 
-2. Create your repository by filling in a Repository Name and clicking "Create"
-3. Visit [this link](https://github.com/settings/tokens/new?description=GitHub%20Readme%20Streak%20Stats) to create a new Personal Access Token (no scopes required)
-4. Scroll to the bottom and click **"Generate token"**
-5. **Add the token** as a Config Var with the key `TOKEN`:
+1. Create your repository by filling in a Repository Name and clicking "Create"
+2. Visit [this link](https://github.com/settings/tokens/new?description=GitHub%20Readme%20Streak%20Stats) to create a new Personal Access Token (no scopes required)
+3. Scroll to the bottom and click **"Generate token"**
+4. **Add the token** as a Config Var with the key `TOKEN`:
 
 ![vercel environment variables](https://github.com/DenverCoder1/github-readme-streak-stats/assets/20955511/17a433d6-0aaa-4c69-9a53-6d4638318fbb)
 
-6. Click **"Deploy"** at the end of the form
-7. Once the app is deployed, click the screenshot of your app or continue to the dashboard to find your domain to use in place of `streak-stats.demolab.com`
+1. Click **"Deploy"** at the end of the form
+2. Once the app is deployed, click the screenshot of your app or continue to the dashboard to find your domain to use in place of `streak-stats.demolab.com`
 
 ![deployment](https://github.com/DenverCoder1/github-readme-streak-stats/assets/20955511/32092461-5983-4fed-b21b-29be55ed85e8)
 
@@ -241,13 +234,13 @@ Heroku is another great option for hosting the files. All features are supported
 
 [![][hspace]](#) [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)][herokudeploy]
 
-5. **Add the token** as a Config Var with the key `TOKEN`:
+1. **Add the token** as a Config Var with the key `TOKEN`:
 
 ![heroku config variables](https://user-images.githubusercontent.com/20955511/136292022-a8d9b3b5-d7d8-4a5e-a049-8d23b51ce9d7.png)
 
-6. (Optional) You can also set the `WHITELIST` Config Var to restrict which GitHub usernames can be accessed through the service. Provide the usernames as a comma-separated list, for example: `user1,user2,user3`. If the variable is not set, information can be requested for any GitHub user.
-7. Click **"Deploy App"** at the end of the form
-8. Once the app is deployed, you can use `<your-app-name>.herokuapp.com` in place of `streak-stats.demolab.com`
+1. (Optional) You can also set the `WHITELIST` Config Var to restrict which GitHub usernames can be accessed through the service. Provide the usernames as a comma-separated list, for example: `user1,user2,user3`. If the variable is not set, information can be requested for any GitHub user.
+2. Click **"Deploy App"** at the end of the form
+3. Once the app is deployed, you can use `<your-app-name>.herokuapp.com` in place of `streak-stats.demolab.com`
 
 </details>
 
@@ -271,7 +264,7 @@ Docker is a great option for self-hosting with full control over your environmen
    cd github-readme-streak-stats
    ```
 
-2. Visit https://github.com/settings/tokens/new?description=GitHub%20Readme%20Streak%20Stats to create a new Personal Access Token (no scopes required)
+2. Visit <https://github.com/settings/tokens/new?description=GitHub%20Readme%20Streak%20Stats> to create a new Personal Access Token (no scopes required)
 
 3. Scroll to the bottom and click "Generate token"
 
@@ -294,35 +287,10 @@ Docker is a great option for self-hosting with full control over your environmen
    docker run -d -p 8080:80 -e TOKEN=your_github_token_here -e WHITELIST=user1,user2,user3 streak-stats
    ```
 
-7. Visit http://localhost:8080 to access your self-hosted instance
+7. Visit <http://localhost:8080> to access your self-hosted instance
 
 </details>
 
 [hspace]: https://user-images.githubusercontent.com/20955511/136058102-b79570bc-4912-4369-b664-064a0ada8588.png
 [verceldeploy]: https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FDenverCoder1%2Fgithub-readme-streak-stats%2Ftree%2Fvercel&env=TOKEN&envDescription=GitHub%20Personal%20Access%20Token%20(no%20scopes%20required)&envLink=https%3A%2F%2Fgithub.com%2Fsettings%2Ftokens%2Fnew%3Fdescription%3DGitHub%2520Readme%2520Streak%2520Stats&project-name=streak-stats&repository-name=github-readme-streak-stats
 [herokudeploy]: https://heroku.com/deploy?template=https://github.com/DenverCoder1/github-readme-streak-stats/tree/main
-
-## 🤗 Contributing
-
-Contributions are welcome! Feel free to [open an issue](https://github.com/DenverCoder1/github-readme-streak-stats/issues/new/choose) or submit a [pull request](https://github.com/DenverCoder1/github-readme-streak-stats/compare) if you have a way to improve this project.
-
-Make sure your request is meaningful and you have tested the app locally before submitting a pull request.
-
-Refer to [CONTRIBUTING.md](/CONTRIBUTING.md) for more details on contributing, installing requirements, and running the application.
-
-## 🙋‍♂️ Support
-
-💙 If you like this project, give it a ⭐ and share it with friends!
-
-<p align="left">
-  <a href="https://www.youtube.com/channel/UCipSxT7a3rn81vGLw9lqRkg?sub_confirmation=1"><img alt="Youtube" title="Youtube" src="https://img.shields.io/badge/-Subscribe-red?style=for-the-badge&logo=youtube&logoColor=white"/></a>
-  <a href="https://github.com/sponsors/DenverCoder1"><img alt="Sponsor with Github" title="Sponsor with Github" src="https://img.shields.io/badge/-Sponsor-ea4aaa?style=for-the-badge&logo=github&logoColor=white"/></a>
-</p>
-
-[☕ Buy me a coffee](https://ko-fi.com/jlawrence)
-
----
-
-Made with ❤️ and PHP
-
-<a href="https://heroku.com/"><img alt="Powered by Heroku" title="Powered by Heroku" src="https://img.shields.io/badge/-Powered%20by%20Heroku-6567a5?style=for-the-badge&logo=heroku&logoColor=white"/></a>

@@ -163,7 +163,7 @@ You can use [GitHub's new media feature](https://github.blog/changelog/2022-05-1
     srcset="https://github-readme-stats.vercel.app/api?username=anuraghazra&show_icons=true"
     media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
   />
-  <img src="https://github-readme-stats.vercel.app/api?username=anuraghazra&show_icons=true" />
+  <img alt="Anurag's GitHub stats" src="https://github-readme-stats.vercel.app/api?username=anuraghazra&show_icons=true" />
 </picture>
 
 </details>
@@ -194,7 +194,9 @@ You can customize the appearance of all your cards however you wish with URL par
 
 You can provide multiple comma-separated values in the bg\_color option to render a gradient with the following format:
 
-    &bg_color=DEG,COLOR1,COLOR2,COLOR3...COLOR10
+```txt
+&bg_color=DEG,COLOR1,COLOR2,COLOR3...COLOR10
+```
 
 ##### Available locales
 
@@ -666,10 +668,10 @@ By default, GitHub does not lay out the cards side by side. To do that, you can 
 <summary>:eyes: Show example</summary>
 
 <a href="https://github.com/anuraghazra/github-readme-stats">
-  <img height=200 align="center" src="https://github-readme-stats.vercel.app/api?username=anuraghazra" />
+  <img alt="GitHub Readme Stats" height=200 align="center" src="https://github-readme-stats.vercel.app/api?username=anuraghazra" />
 </a>
 <a href="https://github.com/anuraghazra/convoychat">
-  <img height=200 align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=anuraghazra&layout=compact&langs_count=8&card_width=320" />
+  <img alt="GitHub Readme Stats" height=200 align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=anuraghazra&layout=compact&langs_count=8&card_width=320" />
 </a>
 
 </details>
@@ -689,10 +691,10 @@ By default, GitHub does not lay out the cards side by side. To do that, you can 
 <summary>:eyes: Show example</summary>
 
 <a href="https://github.com/anuraghazra/github-readme-stats">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=anuraghazra&repo=github-readme-stats" />
+  <img alt="GitHub Readme Stats" align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=anuraghazra&repo=github-readme-stats" />
 </a>
 <a href="https://github.com/anuraghazra/convoychat">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=anuraghazra&repo=convoychat" />
+  <img alt="ConvoyChat Repo" align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=anuraghazra&repo=convoychat" />
 </a>
 
 </details>
@@ -750,19 +752,19 @@ Since the GitHub API only allows 5k requests per hour, my `https://github-readme
 
 1. Go to [vercel.com](https://vercel.com/).
 2. Click on `Log in`.
-    ![](https://files.catbox.moe/pcxk33.png)
+    ![Vercel Homepage](https://files.catbox.moe/pcxk33.png)
 3. Sign in with GitHub by pressing `Continue with GitHub`.
-    ![](https://files.catbox.moe/b9oxey.png)
+    ![Vercel Sign In](https://files.catbox.moe/b9oxey.png)
 4. Sign in to GitHub and allow access to all repositories if prompted.
 5. Fork this repo.
 6. Go back to your [Vercel dashboard](https://vercel.com/dashboard).
 7. To import a project, click the `Add New...` button and select the `Project` option.
-    ![](https://files.catbox.moe/3n76fh.png)
+    ![Vercel Dashboard](https://files.catbox.moe/3n76fh.png)
 8. Click the `Continue with GitHub` button, search for the required Git Repository and import it by clicking the `Import` button. Alternatively, you can import a Third-Party Git Repository using the `Import Third-Party Git Repository ->` link at the bottom of the page.
-    ![](https://files.catbox.moe/mg5p04.png)
+    ![Vercel Project Import](https://files.catbox.moe/mg5p04.png)
 9. Create a Personal Access Token (PAT) as described in the [previous section](#first-step-get-your-personal-access-token-pat).
 10. Add the PAT as an environment variable named `PAT_1` (as shown).
-    ![](https://files.catbox.moe/0yclio.png)
+    ![Vercel Project Configure](https://files.catbox.moe/0yclio.png)
 11. Click deploy, and you're good to go. See your domains to use the API!
 
 </details>
