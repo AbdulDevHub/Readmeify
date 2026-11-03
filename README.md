@@ -2,6 +2,12 @@
 
 Customized GitHub profile cards served from a single Vercel deployment, with personalized color schemes.
 
+## Project Overview
+
+A GitHub profile README can only show images, so "live" stats on a profile are really images generated on demand. Readmeify is a small server that does that: when GitHub loads a URL like `/api/streak?user=abduldevhub`, it asks GitHub's API for that user's activity, draws the result as an SVG card, and caches it so the API isn't hit on every page view.
+
+It started as three separate projects that I customized: a stats card, a contribution-streak card written in PHP, and a proxy that recolors a 3D contribution graph. They are now one JavaScript codebase on one deployment. The streak card was rewritten from PHP and is tested to produce exactly the same image as the original. Every card shares the same token handling, caching and error cards, and new cards follow one pattern: fetch the data, render the SVG, expose an endpoint.
+
 - **Deployed at:** [readmeify-github-readme-stats.vercel.app](https://readmeify-github-readme-stats.vercel.app)
 - **Based on:** [anuraghazra/github-readme-stats](https://github.com/anuraghazra/github-readme-stats), plus a JavaScript port of [DenverCoder1/github-readme-streak-stats](https://github.com/DenverCoder1/github-readme-streak-stats) and a recolor of [yoshi389111/github-profile-3d-contrib](https://github.com/yoshi389111/github-profile-3d-contrib)
 
