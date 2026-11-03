@@ -21,15 +21,15 @@ dated Session log entry (newest first). When old log entries stop being useful, 
 
 ## Next steps
 
-1. Delete the Netlify site `readmeify-edit-svg-proxy` (id `4c180c32-a607-4fe4-a046-8d2d3c5e4113`): `netlify sites:delete 4c180c32-a607-4fe4-a046-8d2d3c5e4113`. The profile no longer uses it.
-2. Delete the old Vercel project `readmeify-github-streak-stat`.
-3. Optional: switch the profile streak URLs to `/api/streak?user=...` (the canonical form).
-4. Delete the leftover empty `Readme-Cards/` folder on disk. It's untracked and was locked by another process during the move.
-5. Future: the user's own custom cards. Follow the fetcher → card → api → express pattern.
+1. Delete the old Vercel project `readmeify-github-streak-stat`.
+2. Optional: switch the profile streak URLs to `/api/streak?user=...` (the canonical form).
+3. Delete the leftover empty `Readme-Cards/` folder on disk. It's untracked and was locked by another process during the move.
+4. Future: the user's own custom cards. Follow the fetcher → card → api → express pattern.
 
 ## Session log
 
 ### 2026-11-03
+- Deleted the Netlify site `readmeify-edit-svg-proxy` (the user ran it; verified it is gone and its URL returns 404). Added the `/?user=` → `/api/streak` rewrite for the profile's old streak URL format.
 - Ported the streak card from PHP (`Github-Streak-Stat/api/*.php`) to JS: `src/fetchers/streak.js`, `src/cards/streak.js`, and data in `src/cards/streak/`. Dropped `type=png` (needed Inkscape, which Vercel doesn't have) and the demo builder page. The streak card now uses the shared `PAT_*` tokens instead of `TOKEN*`.
 - Decision: a failed past-year fetch throws instead of silently dropping the year, so wrong stats don't sit in the cache for 3 hours.
 - Raised the Vercel `maxDuration` from 10 s to 30 s for parallel multi-year fetches.
