@@ -34,6 +34,6 @@ GET /api/<card>?...  (Vercel function, or express.js locally)
 
 ## Deployment
 
-- One Vercel project, `readmeify-github-readme-stats`, root directory = repo root. `vercel.json` gives `api/*.js` 128 MB and 30 s.
+- One Vercel project, `readmeify-stats`, root directory = repo root. `vercel.json` gives `api/*.js` 128 MB and 30 s.
 - Env vars: `PAT_1..n` (required), optional `WHITELIST`, `GIST_WHITELIST`, `EXCLUDE_REPO`, `CACHE_SECONDS`, `FETCH_MULTI_PAGE_STARS`.
 - `.vercelignore` keeps tests, docs and dev config out of the deploy.

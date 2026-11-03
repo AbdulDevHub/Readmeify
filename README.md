@@ -8,7 +8,7 @@ A GitHub profile README can only show images, so "live" stats on a profile are r
 
 It started as three separate projects that I customized: a stats card, a contribution-streak card written in PHP, and a proxy that recolors a 3D contribution graph. They are now one JavaScript codebase on one deployment. The streak card was rewritten from PHP and is tested to produce exactly the same image as the original. Every card shares the same token handling, caching and error cards, and new cards follow one pattern: fetch the data, render the SVG, expose an endpoint.
 
-- **Deployed at:** [readmeify-github-readme-stats.vercel.app](https://readmeify-github-readme-stats.vercel.app)
+- **Deployed at:** [readmeify-stats.vercel.app](https://readmeify-stats.vercel.app)
 - **Based on:** [anuraghazra/github-readme-stats](https://github.com/anuraghazra/github-readme-stats), plus a JavaScript port of [DenverCoder1/github-readme-streak-stats](https://github.com/DenverCoder1/github-readme-streak-stats) and a recolor of [yoshi389111/github-profile-3d-contrib](https://github.com/yoshi389111/github-profile-3d-contrib)
 
 ## Endpoints
@@ -42,7 +42,7 @@ Adding a card: a fetcher in `src/fetchers/`, a renderer in `src/cards/`, an endp
 
 ## Deployment
 
-- **Vercel project:** `readmeify-github-readme-stats`, root directory = repo root
+- **Vercel project:** `readmeify-stats`, root directory = repo root
 - **Environment variables:** `PAT_1`, `PAT_2`, ... (GitHub personal access tokens; rotated on rate limits)
 - **Local:** `npm install`, then `PAT_1=<token> node express.js` and open `http://localhost:9000/api/streak?user=abduldevhub`
 
@@ -51,7 +51,7 @@ Adding a card: a fetcher in `src/fetchers/`, a renderer in `src/cards/`, an endp
 Fetches the 3D contribution SVG generated in [AbdulDevHub/AbdulDevHub](https://github.com/AbdulDevHub/AbdulDevHub) and recolors it: GitHub dark background (`#0d1117`), a custom palette for contribution levels 1–4, and brighter tiles. Colors live in `src/cards/profile-3d.js`.
 
 ```html
-<img src="https://readmeify-github-readme-stats.vercel.app/profile.svg" alt="3D Contributions" />
+<img src="https://readmeify-stats.vercel.app/profile.svg" alt="3D Contributions" />
 ```
 
 ---
@@ -711,11 +711,11 @@ output matches the original PHP card.
   <source
     media="(prefers-color-scheme: dark)"
     srcset="
-      https://readmeify-github-readme-stats.vercel.app/api/streak?user=abduldevhub&theme=dark
+      https://readmeify-stats.vercel.app/api/streak?user=abduldevhub&theme=dark
     "
   />
   <img
-    src="https://readmeify-github-readme-stats.vercel.app/api/streak?user=abduldevhub&theme=light"
+    src="https://readmeify-stats.vercel.app/api/streak?user=abduldevhub&theme=light"
     alt="GitHub Streak"
   />
 </picture>

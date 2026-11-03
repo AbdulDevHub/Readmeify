@@ -12,15 +12,18 @@ dated Session log entry (newest first). When old log entries stop being useful, 
 - `/api/profile-3d` (also `/profile.svg`) replaces the Netlify Edit-Svg-Proxy. Its output is identical to the live Netlify version.
 - 283 Jest tests pass, lint and format are clean, and CI runs `test.yml` on `main`.
 
+- Deployed: Vercel project renamed to `readmeify-stats` (https://readmeify-stats.vercel.app), root directory = repo root.
+- The profile README (AbdulDevHub/AbdulDevHub) points at readmeify-stats for every card. The streak card uses the old PHP-style URL `/?user=...`, which `vercel.json` now rewrites to `/api/streak`. `/` without `user` still redirects to the repo.
+
 ## In progress
 
-- Not deployed yet. Waiting on the user's manual steps (below).
+- The `/?user=` rewrite needs to be pushed and checked live.
 
 ## Next steps
 
-1. **User, in Vercel:** project `readmeify-github-readme-stats` → Settings → Root Directory → clear it (repo root), then push.
-2. **User:** in the profile README (AbdulDevHub/AbdulDevHub), point the streak `<picture>` URLs at `https://readmeify-github-readme-stats.vercel.app/api/streak?user=abduldevhub&theme=dark|light`, and the 3D graph at `https://readmeify-github-readme-stats.vercel.app/profile.svg`.
-3. Check both production URLs render, then delete the old Vercel project `readmeify-github-streak-stat` and the Netlify site `readmeify-edit-svg-proxy`.
+1. Delete the Netlify site `readmeify-edit-svg-proxy` (id `4c180c32-a607-4fe4-a046-8d2d3c5e4113`): `netlify sites:delete 4c180c32-a607-4fe4-a046-8d2d3c5e4113`. The profile no longer uses it.
+2. Delete the old Vercel project `readmeify-github-streak-stat`.
+3. Optional: switch the profile streak URLs to `/api/streak?user=...` (the canonical form).
 4. Delete the leftover empty `Readme-Cards/` folder on disk. It's untracked and was locked by another process during the move.
 5. Future: the user's own custom cards. Follow the fetcher → card → api → express pattern.
 
