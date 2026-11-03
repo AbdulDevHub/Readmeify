@@ -1,12 +1,12 @@
 {
-  "name": "github-readme-stats",
+  "name": "readmeify",
   "version": "1.0.0",
-  "description": "Dynamically generate stats for your GitHub readme",
+  "description": "Custom GitHub profile README cards (stats, top languages, streak, 3D graph) on one Vercel deployment",
   "keywords": [
     "github-readme-stats",
-    "readme-stats",
-    "cards",
-    "card-generator"
+    "streak-stats",
+    "readme",
+    "cards"
   ],
   "main": "src/index.js",
   "type": "module",
