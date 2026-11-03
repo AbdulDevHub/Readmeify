@@ -15,16 +15,16 @@ dated Session log entry (newest first). When old log entries stop being useful, 
 - Deployed: Vercel project renamed to `readmeify-stats` (https://readmeify-stats.vercel.app), root directory = repo root.
 - The profile README (AbdulDevHub/AbdulDevHub) points at readmeify-stats for every card. The streak card uses the old PHP-style URL `/?user=...`, which `vercel.json` now rewrites to `/api/streak`. `/` without `user` still redirects to the repo.
 
+- Old deployments are all removed: the Netlify `readmeify-edit-svg-proxy` site and the Vercel `readmeify-github-streak-stat` project.
+
 ## In progress
 
-- The `/?user=` rewrite needs to be pushed and checked live.
+- Nothing.
 
 ## Next steps
 
-1. Delete the old Vercel project `readmeify-github-streak-stat`.
-2. Optional: switch the profile streak URLs to `/api/streak?user=...` (the canonical form).
-3. Delete the leftover empty `Readme-Cards/` folder on disk. It's untracked and was locked by another process during the move.
-4. Future: the user's own custom cards. Follow the fetcher → card → api → express pattern.
+1. Optional: switch the profile streak URLs to `/api/streak?user=...` (the canonical form).
+2. Future: the user's own custom cards. Follow the fetcher → card → api → express pattern.
 
 ## Session log
 
