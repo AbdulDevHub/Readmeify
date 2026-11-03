@@ -5,6 +5,12 @@
       "maxDuration": 30
     }
   },
+  "rewrites": [
+    {
+      "source": "/profile.svg",
+      "destination": "/api/profile-3d"
+    }
+  ],
   "redirects": [
     {
       "source": "/",
