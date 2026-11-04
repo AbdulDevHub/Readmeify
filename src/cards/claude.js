@@ -11,9 +11,28 @@ const CLAUDE_ORANGE = "D97757";
  * Claude Code's pixel mascot on a 16x16 grid: body, side arms, four legs and
  * two dark eyes (explicit fill so they stay dark whatever the icon color).
  */
-const CLAUDE_CODE_LOGO =
-  '<path shape-rendering="crispEdges" d="M2 3h12v6H2zM0 5h2v2H0zM14 5h2v2h-2zM3 9h1v3H3zM5 9h1v3H5zM10 9h1v3h-1zM12 9h1v3h-1z"/>' +
-  '<path shape-rendering="crispEdges" fill="#1a1a1a" d="M4 4h1v2H4zM11 4h1v2h-1z"/>';
+const CLAUDE_CODE_LOGO = `<g shape-rendering="crispEdges">
+  <path class="cc-legs-a" d="M3 9h1v3H3zM10 9h1v3h-1z"/>
+  <path class="cc-legs-b" d="M5 9h1v3H5zM12 9h1v3h-1z"/>
+  <g class="cc-body">
+    <path d="M2 3h12v6H2zM0 5h2v2H0zM14 5h2v2h-2z"/>
+    <path class="cc-eyes" fill="#1a1a1a" d="M4 4h1v2H4zM11 4h1v2h-1z"/>
+  </g>
+</g>`;
+
+/**
+ * Makes the mascot feel alive: a pixel-step bob, legs alternating as if it is
+ * walking in place, and a blink every few seconds.
+ */
+const LOGO_CSS = `
+  .cc-body { animation: ccBob 0.8s steps(1) infinite; }
+  .cc-legs-a { animation: ccStep 0.8s steps(1) infinite; }
+  .cc-legs-b { animation: ccStep 0.8s steps(1) infinite -0.4s; }
+  .cc-eyes { transform-box: fill-box; transform-origin: center; animation: ccBlink 4s infinite; }
+  @keyframes ccBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-0.6px); } }
+  @keyframes ccStep { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-0.8px); } }
+  @keyframes ccBlink { 0%, 90%, 100% { transform: scaleY(1); } 94% { transform: scaleY(0.15); } }
+`;
 
 const icons = {
   tokens: `<path d="M9.6.3a.6.6 0 0 1 .3.7L8.4 6.5h4.3a.6.6 0 0 1 .5 1l-6.6 8.2a.6.6 0 0 1-1-.6l1.5-5.6H2.8a.6.6 0 0 1-.5-1L8.9.4a.6.6 0 0 1 .7-.1Z"/>`,
@@ -42,8 +61,8 @@ const compact = (n) => {
   return String(Math.round(n));
 };
 
-const CELL = 10;
-const GAP = 3;
+const CELL = 9;
+const GAP = 2;
 
 /**
  * 12-week activity grid (columns = weeks, rows = Sun..Sat), GitHub style.
@@ -131,12 +150,12 @@ const renderClaudeCard = (stats, options = {}) => {
     <g class="stagger" style="animation-delay: ${(i + 3) * 150}ms" transform="translate(25, ${i * 25})">
       <svg class="icon" viewBox="0 0 16 16" width="16" height="16">${row.icon}</svg>
       <text class="stat bold" x="25" y="12.5">${row.label}:</text>
-      <text class="stat bold" x="150" y="12.5" data-testid="${row.label}">${encodeHTML(row.value)}</text>
+      <text class="stat bold" x="140" y="12.5" data-testid="${row.label}">${encodeHTML(row.value)}</text>
     </g>`,
     )
     .join("");
 
-  const width = 467;
+  const width = 400;
   const gridWidth = 12 * (CELL + GAP) - GAP;
   const gridX = width - 25 - gridWidth;
   const caption = [
@@ -149,7 +168,7 @@ const renderClaudeCard = (stats, options = {}) => {
   // (body coordinates are offset 55px down from the card top).
   const logo = hide_title
     ? ""
-    : `<svg class="icon" data-testid="logo" x="23" y="-33" width="20" height="14" viewBox="0 2.5 16 11">${CLAUDE_CODE_LOGO}</svg>`;
+    : `<svg class="icon" data-testid="logo" x="23" y="-33" width="20" height="14" viewBox="0 2.5 16 11" overflow="visible">${CLAUDE_CODE_LOGO}</svg>`;
 
   const body = `
     ${logo}
@@ -159,7 +178,7 @@ const renderClaudeCard = (stats, options = {}) => {
       ${caption
         .map(
           (line, i) =>
-            `<text class="caption" x="${gridWidth / 2}" y="${105 + i * 17}" text-anchor="middle">${line}</text>`,
+            `<text class="caption" x="${gridWidth / 2}" y="${92 + i * 17}" text-anchor="middle">${line}</text>`,
         )
         .join("")}
     </g>`;
@@ -185,6 +204,7 @@ const renderClaudeCard = (stats, options = {}) => {
     .caption { font: 400 12px 'Segoe UI', Ubuntu, "Helvetica Neue", Sans-Serif; fill: ${textColor}; }
     .icon { fill: ${iconColor}; }
     .cell { fill: ${iconColor}; }
+    ${LOGO_CSS}
     .stagger { opacity: 0; animation: fadeInAnimation 0.3s ease-in-out forwards; }
     @supports(-moz-appearance: auto) { .stat { font-size: 12px; } }
   `);
