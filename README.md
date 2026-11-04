@@ -57,7 +57,7 @@ The usage only exists on my PC (Claude Code session logs in `~/.claude/projects`
 <img src="https://readmeify-stats.vercel.app/api/claude?theme=dark" alt="Claude Code Stats" />
 ```
 
-Options: `theme`, `title_color`, `icon_color` (defaults to Claude orange), `text_color`, `bg_color`, `border_color`, `border_radius`, `hide_border`, `hide_title`, `custom_title`, `disable_animations`, `cache_seconds` (12h to 2 days, default 1 day).
+The card is 400×195 and its mascot logo is animated (bob, stepping legs, blink; `disable_animations=true` stops it). Options: `theme`, `title_color`, `icon_color` (defaults to Claude orange), `text_color`, `bg_color`, `border_color`, `border_radius`, `hide_border`, `hide_title`, `custom_title`, `disable_animations`, `cache_seconds` (12h to 2 days, default 1 day).
 
 # 3D Contribution Graph
 
@@ -561,6 +561,7 @@ below.
 | `hide_title`         | Hides the title of your card.                                                                      | boolean                         | `false`                                             |
 | `layout`             | Switches between five available layouts `normal` & `compact` & `donut` & `donut-vertical` & `pie`. | enum                            | `normal`                                            |
 | `card_width`         | Sets the card's width manually.                                                                    | number                          | `300`                                               |
+| `card_height`        | Makes the card taller (never shorter than its content needs), e.g. to match neighbouring cards. | number                          | auto                                                |
 | `langs_count`        | Shows more languages on the card, between 1-20.                                                    | integer                         | `5` for `normal` and `donut`, `6` for other layouts |
 | `exclude_repo`       | Excludes specified repositories.                                                                   | string (comma-separated values) | `null`                                              |
 | `custom_title`       | Sets a custom title for the card.                                                                  | string                          | `Most Used Languages`                               |

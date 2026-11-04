@@ -40,6 +40,7 @@ export type RepoCardOptions = CommonOptions & {
 export type TopLangOptions = CommonOptions & {
   hide_title: boolean;
   card_width: number;
+  card_height: number;
   hide: string[];
   layout: "compact" | "normal" | "donut" | "donut-vertical" | "pie";
   custom_title: string;

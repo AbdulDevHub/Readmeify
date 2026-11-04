@@ -884,3 +884,24 @@ describe("Test renderTopLanguages", () => {
     );
   });
 });
+
+describe("Top languages card_height", () => {
+  const langs = {
+    HTML: { color: "#0f0", name: "HTML", size: 200 },
+    javascript: { color: "#0ff", name: "javascript", size: 200 },
+  };
+  it("grows the card to card_height but never shrinks it", async () => {
+    const { renderTopLanguages } =
+      await import("../src/cards/top-languages.js");
+    const tall = renderTopLanguages(langs, {
+      layout: "compact",
+      card_height: 195,
+    });
+    expect(tall).toContain('height="195"');
+    const short = renderTopLanguages(langs, {
+      layout: "compact",
+      card_height: 10,
+    });
+    expect(short).not.toContain('height="10"');
+  });
+});

@@ -784,6 +784,7 @@ const renderTopLanguages = (topLangs, options = {}) => {
     hide_title = false,
     hide_border = false,
     card_width,
+    card_height,
     title_color,
     text_color,
     bg_color,
@@ -874,6 +875,12 @@ const renderTopLanguages = (topLangs, options = {}) => {
       totalLanguageSize,
       stats_format,
     );
+  }
+
+  // Optional taller card (never shorter than the layout needs), e.g. to match
+  // the height of neighbouring cards on a profile.
+  if (Number.isFinite(card_height) && card_height > height) {
+    height = Math.min(card_height, 1000);
   }
 
   const card = new Card({
