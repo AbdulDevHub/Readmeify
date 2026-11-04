@@ -26,7 +26,7 @@ Node 22, ESM, Vercel serverless functions (`api/*.js`), axios for GitHub GraphQL
 - Streak theme/color/translation data in `src/cards/streak/` was mechanically converted from PHP; edit it as data.
 - Validate/escape every query param that reaches SVG markup (colors by regex, numbers parsed, text via `escapeHtml`).
 - `.md` files are in `.prettierignore`; keep GitHub alert syntax (`> [!NOTE]` on its own line).
-- Commit titles in Title Case.
+- Commits: use the `gitmoji-commit` skill (e.g. `✨ feat: Add Claude card`), per the user (2026-11-03).
 
 ## Boundaries
 - `.env` is denied to agents; don't try to read it.
