@@ -10,7 +10,7 @@ dated Session log entry (newest first). When old log entries stop being useful, 
 - One codebase at the repo root serves every card from one Vercel project: stats, top languages, streak, pins, gist, WakaTime, 3D graph.
 - `/api/streak` is a JavaScript port of the PHP streak card. Its output is byte-identical to the old PHP deployment (checked against the live card on 2026-11-03).
 - `/api/profile-3d` (also `/profile.svg`) replaces the Netlify Edit-Svg-Proxy. Its output is identical to the live Netlify version.
-- `/api/claude` is a Claude Code stats card (tokens, sessions, prompts, tool calls, active days, 12-week heatmap, top model). Data: `stats.json` in private AbdulDevHub/Claude-Routines, pushed by a local SessionStart hook once per calendar month.
+- `/api/claude` is a Claude Code stats card (tokens, sessions, prompts, tool calls, active days, 12-week heatmap, top model). Data: `stats.json` in private AbdulDevHub/Claude-Code-Hub, pushed by a local SessionStart hook once per calendar month.
 - 292 Jest tests pass, lint and format are clean, and CI runs `test.yml` on `main`.
 
 - Deployed: Vercel project renamed to `readmeify-stats` (https://readmeify-stats.vercel.app), root directory = repo root.
@@ -31,9 +31,9 @@ dated Session log entry (newest first). When old log entries stop being useful, 
 
 ### 2026-11-03 (Claude card)
 - Profile layout: two rows of 820px, every card 195px tall. Top-langs got a `card_height` option (shown with `langs_count=8&card_width=333&card_height=195`, floated left), streak uses `card_width=400` (floated left), the Claude card is 400 wide. GitHub adds 20px right padding to `align="left"` images, so each row is 820px of the 831px README column. GitHub caches images (camo) for the card's cache TTL; add a `&v=N` param to the profile URL to force a refresh. Animated the Claude Code mascot. Commits now use the gitmoji-commit skill.
-- Card is live and on the profile README next to the streak card (dark/light). Title logo is now the Claude Code pixel mascot (drawn larger in the body, since Card's title icon is a fixed 16x16). Added `Images/ClaudeCode.svg` to the profile's Languages and Tools list. Vercel PAT_1 can read the private Claude-Routines repo.
+- Card is live and on the profile README next to the streak card (dark/light). Title logo is now the Claude Code pixel mascot (drawn larger in the body, since Card's title icon is a fixed 16x16). Added `Images/ClaudeCode.svg` to the profile's Languages and Tools list. Vercel PAT_1 can read the private Claude-Code-Hub repo.
 - Added the Claude Code stats card: `src/fetchers/claude.js`, `src/cards/claude.js`, `api/claude.js`, `CACHE_TTL.CLAUDE_CARD`, tests. Styled to match the stats card (467×195), Claude-orange icons and heatmap.
-- Publisher lives outside this repo: `~/.claude/claude-routines/claude-stats/compute.mjs` + `~/.claude/hooks/claude-stats-monthly.ps1` (registered as an async SessionStart hook). Decision: monthly refresh on first session of the month, per the user, not a scheduled task.
+- Publisher lives outside this repo: `~/.claude/claude-code-hub/claude-stats/compute.mjs` + `~/.claude/hooks/claude-stats-monthly.ps1` (registered as an async SessionStart hook). Decision: monthly refresh on first session of the month, per the user, not a scheduled task.
 - Fixed a production bug: `theme=light` (used by the profile for light mode) crashed the stats and top-langs cards because `light` isn't a theme; `getCardColors` now falls back to the default theme.
 
 ### 2026-11-03

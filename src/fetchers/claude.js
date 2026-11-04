@@ -9,7 +9,7 @@ import { CustomError } from "../common/error.js";
  * SessionStart hook (see README "Claude Code card") into a private repo, so
  * it is read through the GitHub contents API with the shared PATs.
  */
-const DEFAULT_SOURCE = "AbdulDevHub/Claude-Routines/claude-stats/stats.json";
+const DEFAULT_SOURCE = "AbdulDevHub/Claude-Code-Hub/claude-stats/stats.json";
 
 const INVALID = "Check the stats.json written by the monthly hook";
 

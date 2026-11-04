@@ -5,7 +5,7 @@ import { fetchClaudeStats } from "../src/fetchers/claude.js";
 
 const mock = new MockAdapter(axios);
 const URL =
-  "https://api.github.com/repos/AbdulDevHub/Claude-Routines/contents/claude-stats/stats.json";
+  "https://api.github.com/repos/AbdulDevHub/Claude-Code-Hub/contents/claude-stats/stats.json";
 
 const data = {
   month: "2026-11",

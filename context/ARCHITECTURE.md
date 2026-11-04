@@ -17,7 +17,7 @@ GET /api/<card>?...  (Vercel function, or express.js locally)
 
 `/profile.svg` is rewritten (in `vercel.json`) to `api/profile-3d.js`. That endpoint skips GitHub's API: it fetches a pre-generated SVG from raw.githubusercontent.com and string-replaces colors (`src/cards/profile-3d.js`).
 
-`api/claude.js` also skips GraphQL: it reads `claude-stats/stats.json` from the private Claude-Routines repo via the REST contents API (still through `retryer` for the PAT). A local monthly SessionStart hook writes that file.
+`api/claude.js` also skips GraphQL: it reads `claude-stats/stats.json` from the private Claude-Code-Hub repo via the REST contents API (still through `retryer` for the PAT). A local monthly SessionStart hook writes that file.
 
 ## Folders
 

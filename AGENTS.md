@@ -6,7 +6,7 @@ After any meaningful change to this project, update this file, `context/PROGRESS
 Verify: npm test && npm run lint
 
 ## Overview
-Fork of anuraghazra/github-readme-stats that also serves a JS port of DenverCoder1's streak card and a recolored 3D contribution graph, all from one Vercel project (`readmeify-stats`, root directory = repo root). Also a Claude Code stats card (`/api/claude`) whose data is pushed monthly to the private Claude-Routines repo by a local SessionStart hook (`~/.claude/hooks/claude-stats-monthly.ps1` → `~/.claude/claude-routines/claude-stats/compute.mjs`).
+Fork of anuraghazra/github-readme-stats that also serves a JS port of DenverCoder1's streak card and a recolored 3D contribution graph, all from one Vercel project (`readmeify-stats`, root directory = repo root). Also a Claude Code stats card (`/api/claude`) whose data is pushed monthly to the private Claude-Code-Hub repo by a local SessionStart hook (`~/.claude/hooks/claude-stats-monthly.ps1` → `~/.claude/claude-code-hub/claude-stats/compute.mjs`).
 
 ## Tech stack
 Node 22, ESM, Vercel serverless functions (`api/*.js`), axios for GitHub GraphQL, Jest (jsdom) + axios-mock-adapter, ESLint 9 + Prettier, Express for local dev only.
