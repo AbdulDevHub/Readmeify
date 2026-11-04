@@ -35,6 +35,7 @@ Node 22, ESM, Vercel serverless functions (`api/*.js`), axios for GitHub GraphQL
 - Unknown `theme` values (the profile uses `theme=light`) fall back to the default theme in `getCardColors`; don't reintroduce a crash there.
 
 ## More
-- `README.md` – plain-language overview, endpoints, and full card options.
+- `README.md` – short public overview (also the GitHub landing page; keep it scannable).
+- `docs/CARD_OPTIONS.md` – full options for every card (moved out of the README).
 - `context/PROGRESS_TRACKER.md` – current state, next steps, session log.
 - `context/ARCHITECTURE.md` – request flow, folders, deployment.
