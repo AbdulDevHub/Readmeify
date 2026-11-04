@@ -6,7 +6,7 @@ Customized GitHub profile cards served from a single Vercel deployment, with per
 
 A GitHub profile README can only show images, so "live" stats on a profile are really images generated on demand. Readmeify is a small server that does that: when GitHub loads a URL like `/api/streak?user=abduldevhub`, it asks GitHub's API for that user's activity, draws the result as an SVG card, and caches it so the API isn't hit on every page view.
 
-It started as three separate projects that I customized: a stats card, a contribution-streak card written in PHP, and a proxy that recolors a 3D contribution graph. They are now one JavaScript codebase on one deployment. The streak card was rewritten from PHP and is tested to produce exactly the same image as the original. Every card shares the same token handling, caching and error cards, and new cards follow one pattern: fetch the data, render the SVG, expose an endpoint.
+It started as three separate projects that I customized: a stats card, a contribution-streak card written in PHP, and a proxy that recolors a 3D contribution graph. They are now one JavaScript codebase on one deployment, plus a Claude Code stats card of my own. The streak card was rewritten from PHP and is tested to produce exactly the same image as the original. Every card shares the same token handling, caching and error cards, and new cards follow one pattern: fetch the data, render the SVG, expose an endpoint.
 
 - **Deployed at:** [readmeify-stats.vercel.app](https://readmeify-stats.vercel.app)
 - **Based on:** [anuraghazra/github-readme-stats](https://github.com/anuraghazra/github-readme-stats), plus a JavaScript port of [DenverCoder1/github-readme-streak-stats](https://github.com/DenverCoder1/github-readme-streak-stats) and a recolor of [yoshi389111/github-profile-3d-contrib](https://github.com/yoshi389111/github-profile-3d-contrib)
@@ -22,6 +22,7 @@ It started as three separate projects that I customized: a stats card, a contrib
 | `/api/gist?id=...` | [Gist pin](#github-gist-pins) |
 | `/api/wakatime?username=...` | [WakaTime card](#wakatime-stats-card) |
 | `/api/profile-3d` (or `/profile.svg`) | [3D contribution graph](#3d-contribution-graph) |
+| `/api/claude` | [Claude Code stats card](#claude-code-stats-card) |
 
 ## Project Structure
 
@@ -43,8 +44,20 @@ Adding a card: a fetcher in `src/fetchers/`, a renderer in `src/cards/`, an endp
 ## Deployment
 
 - **Vercel project:** `readmeify-stats`, root directory = repo root
-- **Environment variables:** `PAT_1`, `PAT_2`, ... (GitHub personal access tokens; rotated on rate limits)
+- **Environment variables:** `PAT_1`, `PAT_2`, ... (GitHub personal access tokens; rotated on rate limits). Optional `CLAUDE_STATS_SOURCE` (`owner/repo/path.json`, default `AbdulDevHub/Claude-Routines/claude-stats/stats.json`).
 - **Local:** `npm install`, then `PAT_1=<token> node express.js` and open `http://localhost:9000/api/streak?user=abduldevhub`
+
+# Claude Code Stats Card
+
+Shows my Claude Code usage: tokens used, sessions, prompts sent, tool calls, active days, a 12-week activity heatmap, top model and best streak, with the Claude spark logo in Claude orange (`#D97757`).
+
+The usage only exists on my PC (Claude Code session logs in `~/.claude/projects`), so a SessionStart hook (`~/.claude/hooks/claude-stats-monthly.ps1`) runs once per calendar month, the first time Claude Code opens that month. It runs `claude-stats/compute.mjs` in the private [Claude-Routines](https://github.com/AbdulDevHub/Claude-Routines) repo and pushes the resulting `stats.json`. The card reads that file through the GitHub API with the `PAT_*` tokens, so a token needs read access to that repo.
+
+```html
+<img src="https://readmeify-stats.vercel.app/api/claude?theme=dark" alt="Claude Code Stats" />
+```
+
+Options: `theme`, `title_color`, `icon_color` (defaults to Claude orange), `text_color`, `bg_color`, `border_color`, `border_radius`, `hide_border`, `hide_title`, `custom_title`, `disable_animations`, `cache_seconds` (12h to 2 days, default 1 day).
 
 # 3D Contribution Graph
 

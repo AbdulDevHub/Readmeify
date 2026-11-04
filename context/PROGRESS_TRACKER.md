@@ -10,7 +10,8 @@ dated Session log entry (newest first). When old log entries stop being useful, 
 - One codebase at the repo root serves every card from one Vercel project: stats, top languages, streak, pins, gist, WakaTime, 3D graph.
 - `/api/streak` is a JavaScript port of the PHP streak card. Its output is byte-identical to the old PHP deployment (checked against the live card on 2026-11-03).
 - `/api/profile-3d` (also `/profile.svg`) replaces the Netlify Edit-Svg-Proxy. Its output is identical to the live Netlify version.
-- 283 Jest tests pass, lint and format are clean, and CI runs `test.yml` on `main`.
+- `/api/claude` is a Claude Code stats card (tokens, sessions, prompts, tool calls, active days, 12-week heatmap, top model). Data: `stats.json` in private AbdulDevHub/Claude-Routines, pushed by a local SessionStart hook once per calendar month.
+- 292 Jest tests pass, lint and format are clean, and CI runs `test.yml` on `main`.
 
 - Deployed: Vercel project renamed to `readmeify-stats` (https://readmeify-stats.vercel.app), root directory = repo root.
 - The profile README (AbdulDevHub/AbdulDevHub) points at readmeify-stats for every card. The streak card uses the old PHP-style URL `/?user=...`, which `vercel.json` now rewrites to `/api/streak`. `/` without `user` still redirects to the repo.
@@ -19,7 +20,7 @@ dated Session log entry (newest first). When old log entries stop being useful, 
 
 ## In progress
 
-- Nothing.
+- Claude card: confirm the deployed card loads (Vercel `PAT_1` needs read access to the private Claude-Routines repo), then add it to the profile README.
 
 ## Next steps
 
@@ -27,6 +28,11 @@ dated Session log entry (newest first). When old log entries stop being useful, 
 2. Future: the user's own custom cards. Follow the fetcher → card → api → express pattern.
 
 ## Session log
+
+### 2026-11-03 (Claude card)
+- Added the Claude Code stats card: `src/fetchers/claude.js`, `src/cards/claude.js`, `api/claude.js`, `CACHE_TTL.CLAUDE_CARD`, tests. Styled to match the stats card (467×195), Claude-orange icons and heatmap.
+- Publisher lives outside this repo: `~/.claude/claude-routines/claude-stats/compute.mjs` + `~/.claude/hooks/claude-stats-monthly.ps1` (registered as an async SessionStart hook). Decision: monthly refresh on first session of the month, per the user, not a scheduled task.
+- Fixed a production bug: `theme=light` (used by the profile for light mode) crashed the stats and top-langs cards because `light` isn't a theme; `getCardColors` now falls back to the default theme.
 
 ### 2026-11-03
 - Deleted the Netlify site `readmeify-edit-svg-proxy` (the user ran it; verified it is gone and its URL returns 404). Added the `/?user=` → `/api/streak` rewrite for the profile's old streak URL format.

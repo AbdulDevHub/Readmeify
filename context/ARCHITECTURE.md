@@ -17,6 +17,8 @@ GET /api/<card>?...  (Vercel function, or express.js locally)
 
 `/profile.svg` is rewritten (in `vercel.json`) to `api/profile-3d.js`. That endpoint skips GitHub's API: it fetches a pre-generated SVG from raw.githubusercontent.com and string-replaces colors (`src/cards/profile-3d.js`).
 
+`api/claude.js` also skips GraphQL: it reads `claude-stats/stats.json` from the private Claude-Routines repo via the REST contents API (still through `retryer` for the PAT). A local monthly SessionStart hook writes that file.
+
 ## Folders
 
 - `api/` – endpoints; `api/status/` holds the upstream health/PAT-info endpoints.
@@ -35,5 +37,5 @@ GET /api/<card>?...  (Vercel function, or express.js locally)
 ## Deployment
 
 - One Vercel project, `readmeify-stats`, root directory = repo root. `vercel.json` gives `api/*.js` 128 MB and 30 s.
-- Env vars: `PAT_1..n` (required), optional `WHITELIST`, `GIST_WHITELIST`, `EXCLUDE_REPO`, `CACHE_SECONDS`, `FETCH_MULTI_PAGE_STARS`.
+- Env vars: `PAT_1..n` (required), optional `CLAUDE_STATS_SOURCE`, `WHITELIST`, `GIST_WHITELIST`, `EXCLUDE_REPO`, `CACHE_SECONDS`, `FETCH_MULTI_PAGE_STARS`.
 - `.vercelignore` keeps tests, docs and dev config out of the deploy.

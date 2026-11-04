@@ -6,6 +6,7 @@ import wakatimeCard from "./api/wakatime.js";
 import gistCard from "./api/gist.js";
 import streakCard from "./api/streak.js";
 import profile3d from "./api/profile-3d.js";
+import claudeCard from "./api/claude.js";
 import express from "express";
 
 const app = express();
@@ -18,6 +19,7 @@ router.get("/wakatime", wakatimeCard);
 router.get("/gist", gistCard);
 router.get("/streak", streakCard);
 router.get("/profile-3d", profile3d);
+router.get("/claude", claudeCard);
 
 app.use("/api", router);
 app.get("/profile.svg", profile3d);
