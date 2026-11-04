@@ -562,6 +562,7 @@ below.
 | `layout`             | Switches between five available layouts `normal` & `compact` & `donut` & `donut-vertical` & `pie`. | enum                            | `normal`                                            |
 | `card_width`         | Sets the card's width manually.                                                                    | number                          | `300`                                               |
 | `card_height`        | Makes the card taller (never shorter than its content needs), e.g. to match neighbouring cards. | number                          | auto                                                |
+| (compact + `card_width`) |  When `card_width` is set on the compact layout, the second column of languages is pushed right so it ends where the progress bar ends. | | |
 | `langs_count`        | Shows more languages on the card, between 1-20.                                                    | integer                         | `5` for `normal` and `donut`, `6` for other layouts |
 | `exclude_repo`       | Excludes specified repositories.                                                                   | string (comma-separated values) | `null`                                              |
 | `custom_title`       | Sets a custom title for the card.                                                                  | string                          | `Most Used Languages`                               |

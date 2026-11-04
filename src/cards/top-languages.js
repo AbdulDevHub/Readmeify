@@ -306,6 +306,7 @@ const createLanguageTextNode = ({
   totalSize,
   hideProgress,
   statsFormat,
+  spreadWidth,
 }) => {
   const longestLang = getLongestLang(langs);
   const chunked = chunkArray(langs, langs.length / 2);
@@ -330,10 +331,24 @@ const createLanguageTextNode = ({
   const percent = ((longestLang.size / totalSize) * 100).toFixed(2);
   const minGap = 150;
   const maxGap = 20 + measureText(`${longestLang.name} ${percent}%`, 11);
-  return flexLayout({
-    items: layouts,
-    gap: maxGap < minGap ? minGap : maxGap,
-  }).join("");
+  let gap = maxGap < minGap ? minGap : maxGap;
+
+  // With an explicit card width, push the second column right so its longest
+  // label ends where the progress bar ends, instead of leaving the right empty.
+  if (spreadWidth && chunked.length === 2) {
+    const labelWidth = (lang) => {
+      const value = getDisplayValue(
+        lang.size,
+        (lang.size / totalSize) * 100,
+        statsFormat,
+      );
+      return 15 + measureText(`${lang.name} ${hideProgress ? "" : value}`, 11);
+    };
+    const secondColumnWidth = Math.max(...chunked[1].map(labelWidth));
+    gap = Math.max(gap, Math.floor(spreadWidth - secondColumnWidth));
+  }
+
+  return flexLayout({ items: layouts, gap }).join("");
 };
 
 /**
@@ -396,6 +411,7 @@ const renderNormalLayout = (langs, width, totalLanguageSize, statsFormat) => {
  * @param {number} totalLanguageSize Total size of all languages.
  * @param {boolean=} hideProgress Whether to hide progress bar.
  * @param {string} statsFormat Stats format.
+ * @param {boolean=} spread Spread the two label columns across the card width.
  * @returns {string} Compact layout card SVG object.
  */
 const renderCompactLayout = (
@@ -404,6 +420,7 @@ const renderCompactLayout = (
   totalLanguageSize,
   hideProgress,
   statsFormat = "percentages",
+  spread = false,
 ) => {
   const paddingRight = 50;
   const offsetWidth = width - paddingRight;
@@ -451,6 +468,7 @@ const renderCompactLayout = (
         totalSize: totalLanguageSize,
         hideProgress,
         statsFormat,
+        spreadWidth: spread ? offsetWidth : undefined,
       })}
     </g>
   `;
@@ -858,6 +876,7 @@ const renderTopLanguages = (topLangs, options = {}) => {
       totalLanguageSize,
       hide_progress,
       stats_format,
+      Boolean(card_width),
     );
   } else if (layout === "donut") {
     height = calculateDonutLayoutHeight(langs.length);

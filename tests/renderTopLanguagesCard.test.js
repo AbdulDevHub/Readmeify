@@ -905,3 +905,30 @@ describe("Top languages card_height", () => {
     expect(short).not.toContain('height="10"');
   });
 });
+
+describe("Top languages compact spread", () => {
+  const langs = {
+    HTML: { color: "#0f0", name: "HTML", size: 200 },
+    javascript: { color: "#0ff", name: "javascript", size: 200 },
+    css: { color: "#ff0", name: "css", size: 100 },
+    go: { color: "#f0f", name: "go", size: 100 },
+  };
+  const secondColumnX = (svg) =>
+    Math.max(
+      ...[...svg.matchAll(/translate\((\d+(?:\.\d+)?), 0\)/g)].map((m) =>
+        Number(m[1]),
+      ),
+    );
+
+  it("pushes the second column right only when card_width is set", async () => {
+    const { renderTopLanguages } =
+      await import("../src/cards/top-languages.js");
+    const auto = renderTopLanguages(langs, { layout: "compact" });
+    const wide = renderTopLanguages(langs, {
+      layout: "compact",
+      card_width: 400,
+    });
+    expect(secondColumnX(auto)).toBe(150);
+    expect(secondColumnX(wide)).toBeGreaterThan(200);
+  });
+});
