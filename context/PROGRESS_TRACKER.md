@@ -20,7 +20,7 @@ dated Session log entry (newest first). When old log entries stop being useful, 
 
 ## In progress
 
-- Claude card: confirm the deployed card loads (Vercel `PAT_1` needs read access to the private Claude-Routines repo), then add it to the profile README.
+- Nothing.
 
 ## Next steps
 
@@ -30,6 +30,7 @@ dated Session log entry (newest first). When old log entries stop being useful, 
 ## Session log
 
 ### 2026-11-03 (Claude card)
+- Card is live and on the profile README next to the streak card (dark/light). Title logo is now the Claude Code pixel mascot (drawn larger in the body, since Card's title icon is a fixed 16x16). Added `Images/ClaudeCode.svg` to the profile's Languages and Tools list. Vercel PAT_1 can read the private Claude-Routines repo.
 - Added the Claude Code stats card: `src/fetchers/claude.js`, `src/cards/claude.js`, `api/claude.js`, `CACHE_TTL.CLAUDE_CARD`, tests. Styled to match the stats card (467×195), Claude-orange icons and heatmap.
 - Publisher lives outside this repo: `~/.claude/claude-routines/claude-stats/compute.mjs` + `~/.claude/hooks/claude-stats-monthly.ps1` (registered as an async SessionStart hook). Decision: monthly refresh on first session of the month, per the user, not a scheduled task.
 - Fixed a production bug: `theme=light` (used by the profile for light mode) crashed the stats and top-langs cards because `light` isn't a theme; `getCardColors` now falls back to the default theme.
