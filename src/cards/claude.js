@@ -8,30 +8,20 @@ import { encodeHTML } from "../common/html.js";
 const CLAUDE_ORANGE = "D97757";
 
 /**
- * Claude Code's pixel mascot on a 16x16 grid: body, side arms, four legs and
- * two dark eyes (explicit fill so they stay dark whatever the icon color).
+ * The official Claude Code mascot (600x600 artwork; the eyes are cut-outs).
+ * Dark eye rects sit behind the cut-outs so the eyes stay dark on any
+ * background, and orange "eyelids" drop over them to blink.
  */
 const CLAUDE_CODE_LOGO = `<g shape-rendering="crispEdges">
-  <path class="cc-legs-a" d="M3 9h1v3H3zM10 9h1v3h-1z"/>
-  <path class="cc-legs-b" d="M5 9h1v3H5zM12 9h1v3h-1z"/>
-  <g class="cc-body">
-    <path d="M2 3h12v6H2zM0 5h2v2H0zM14 5h2v2h-2z"/>
-    <path class="cc-eyes" fill="#1a1a1a" d="M4 4h1v2H4zM11 4h1v2h-1z"/>
-  </g>
+  <path fill="#1a1a1a" d="M150 202.6h37.2v71.1H150zM412.8 202.6H450v71.1h-37.2z"/>
+  <path fill-rule="evenodd" d="M525 273.7h75v77.6h-75V427h-37.2v73H450v-73h-37.2v73H375v-73H225v73h-37.8v-73H150v73h-37.8v-73H75v-75.7H0v-77.6h75V125h450zm-375 0h37.2v-71.1H150zm262.8 0H450v-71.1h-37.2z"/>
+  <path class="cc-lids" d="M150 202.6h37.2v71.1H150zM412.8 202.6H450v71.1h-37.2z"/>
 </g>`;
 
-/**
- * Makes the mascot feel alive: a pixel-step bob, legs alternating as if it is
- * walking in place, and a blink every few seconds.
- */
+/** A quick blink every 2.5 seconds. */
 const LOGO_CSS = `
-  .cc-body { animation: ccBob 0.8s steps(1) infinite; }
-  .cc-legs-a { animation: ccStep 0.8s steps(1) infinite; }
-  .cc-legs-b { animation: ccStep 0.8s steps(1) infinite -0.4s; }
-  .cc-eyes { transform-box: fill-box; transform-origin: center; animation: ccBlink 4s infinite; }
-  @keyframes ccBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-0.6px); } }
-  @keyframes ccStep { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-0.8px); } }
-  @keyframes ccBlink { 0%, 90%, 100% { transform: scaleY(1); } 94% { transform: scaleY(0.15); } }
+  .cc-lids { transform-box: fill-box; transform-origin: top; transform: scaleY(0); animation: ccBlink 2.5s infinite; }
+  @keyframes ccBlink { 0%, 86%, 100% { transform: scaleY(0); } 90%, 93% { transform: scaleY(1); } }
 `;
 
 const icons = {
@@ -61,7 +51,7 @@ const compact = (n) => {
   return String(Math.round(n));
 };
 
-const CELL = 9;
+const CELL = 8;
 const GAP = 2;
 
 /**
@@ -150,12 +140,12 @@ const renderClaudeCard = (stats, options = {}) => {
     <g class="stagger" style="animation-delay: ${(i + 3) * 150}ms" transform="translate(25, ${i * 25})">
       <svg class="icon" viewBox="0 0 16 16" width="16" height="16">${row.icon}</svg>
       <text class="stat bold" x="25" y="12.5">${row.label}:</text>
-      <text class="stat bold" x="140" y="12.5" data-testid="${row.label}">${encodeHTML(row.value)}</text>
+      <text class="stat bold" x="136" y="12.5" data-testid="${row.label}">${encodeHTML(row.value)}</text>
     </g>`,
     )
     .join("");
 
-  const width = 400;
+  const width = 380;
   const gridWidth = 12 * (CELL + GAP) - GAP;
   const gridX = width - 25 - gridWidth;
   const caption = [
@@ -168,7 +158,7 @@ const renderClaudeCard = (stats, options = {}) => {
   // (body coordinates are offset 55px down from the card top).
   const logo = hide_title
     ? ""
-    : `<svg class="icon" data-testid="logo" x="23" y="-33" width="20" height="14" viewBox="0 2.5 16 11" overflow="visible">${CLAUDE_CODE_LOGO}</svg>`;
+    : `<svg class="icon" data-testid="logo" x="23" y="-33" width="21" height="14" viewBox="0 120 600 385">${CLAUDE_CODE_LOGO}</svg>`;
 
   const body = `
     ${logo}
@@ -178,7 +168,7 @@ const renderClaudeCard = (stats, options = {}) => {
       ${caption
         .map(
           (line, i) =>
-            `<text class="caption" x="${gridWidth / 2}" y="${92 + i * 17}" text-anchor="middle">${line}</text>`,
+            `<text class="caption" x="${gridWidth / 2}" y="${86 + i * 17}" text-anchor="middle">${line}</text>`,
         )
         .join("")}
     </g>`;

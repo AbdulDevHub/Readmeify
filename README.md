@@ -57,7 +57,7 @@ The usage only exists on my PC (Claude Code session logs in `~/.claude/projects`
 <img src="https://readmeify-stats.vercel.app/api/claude?theme=dark" alt="Claude Code Stats" />
 ```
 
-The card is 400×195 and its mascot logo is animated (bob, stepping legs, blink; `disable_animations=true` stops it). Options: `theme`, `title_color`, `icon_color` (defaults to Claude orange), `text_color`, `bg_color`, `border_color`, `border_radius`, `hide_border`, `hide_title`, `custom_title`, `disable_animations`, `cache_seconds` (12h to 2 days, default 1 day).
+The card is 380×195 and its Claude Code mascot logo blinks every few seconds (`disable_animations=true` stops it). Options: `theme`, `title_color`, `icon_color` (defaults to Claude orange), `text_color`, `bg_color`, `border_color`, `border_radius`, `hide_border`, `hide_title`, `custom_title`, `disable_animations`, `cache_seconds` (12h to 2 days, default 1 day).
 
 # 3D Contribution Graph
 
