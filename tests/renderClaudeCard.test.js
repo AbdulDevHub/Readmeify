@@ -32,6 +32,7 @@ describe("renderClaudeCard", () => {
       "4.9k",
     );
     expect(document.body).toHaveTextContent("Top model: Opus 5.5");
+    expect(queryByTestId(document.body, "logo")).not.toBeNull();
     // 84 days minus the one future (null) day.
     expect(document.querySelectorAll(".cell")).toHaveLength(83);
   });
@@ -58,6 +59,7 @@ describe("renderClaudeCard", () => {
       hide_border: true,
     });
     expect(queryByTestId(document.body, "header")).toBeNull();
+    expect(queryByTestId(document.body, "logo")).toBeNull();
     expect(queryByTestId(document.body, "card-bg")).toHaveAttribute(
       "stroke-opacity",
       "0",

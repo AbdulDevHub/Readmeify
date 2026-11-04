@@ -8,26 +8,14 @@ import { encodeHTML } from "../common/html.js";
 const CLAUDE_ORANGE = "D97757";
 
 /**
- * Builds the Claude spark mark (a hand-tuned starburst) as a 16x16 path.
- *
- * @returns {string} SVG path markup.
+ * Claude Code's pixel mascot on a 16x16 grid: body, side arms, four legs and
+ * two dark eyes (explicit fill so they stay dark whatever the icon color).
  */
-const buildSpark = () => {
-  // Uneven ray lengths give the hand-drawn look of the Claude mark.
-  const lengths = [7.6, 6.4, 7.2, 5.9, 7.7, 6.6, 7.0, 6.1, 7.5, 6.3, 7.1];
-  const points = lengths.map((len, i) => {
-    const a = (i / lengths.length) * Math.PI * 2 - Math.PI / 2;
-    const cos = Math.cos(a);
-    const sin = Math.sin(a);
-    const at = (r, w) =>
-      `${(8 + cos * r - sin * w).toFixed(2)} ${(8 + sin * r + cos * w).toFixed(2)}`;
-    return `M${at(0, -0.8)}L${at(len - 0.7, -1.05)}Q${at(len + 0.45, 0)} ${at(len - 0.7, 1.05)}L${at(0, 0.8)}Z`;
-  });
-  return `<path d="${points.join("")}"/><circle cx="8" cy="8" r="2.4"/>`;
-};
+const CLAUDE_CODE_LOGO =
+  '<path shape-rendering="crispEdges" d="M2 3h12v6H2zM0 5h2v2H0zM14 5h2v2h-2zM3 9h1v3H3zM5 9h1v3H5zM10 9h1v3h-1zM12 9h1v3h-1z"/>' +
+  '<path shape-rendering="crispEdges" fill="#1a1a1a" d="M4 4h1v2H4zM11 4h1v2h-1z"/>';
 
 const icons = {
-  spark: buildSpark(),
   tokens: `<path d="M9.6.3a.6.6 0 0 1 .3.7L8.4 6.5h4.3a.6.6 0 0 1 .5 1l-6.6 8.2a.6.6 0 0 1-1-.6l1.5-5.6H2.8a.6.6 0 0 1-.5-1L8.9.4a.6.6 0 0 1 .7-.1Z"/>`,
   sessions: `<path fill-rule="evenodd" d="M0 2.75C0 1.78.78 1 1.75 1h12.5c.97 0 1.75.78 1.75 1.75v10.5c0 .97-.78 1.75-1.75 1.75H1.75C.78 15 0 14.22 0 13.25Zm1.75-.25a.25.25 0 0 0-.25.25v10.5c0 .14.11.25.25.25h12.5a.25.25 0 0 0 .25-.25V2.75a.25.25 0 0 0-.25-.25ZM7.25 8a.75.75 0 0 1-.22.53l-2.25 2.25a.75.75 0 0 1-1.06-1.06L5.44 8 3.72 6.28a.75.75 0 0 1 1.06-1.06l2.25 2.25c.14.14.22.33.22.53Zm1.5 1.5h3a.75.75 0 0 1 0 1.5h-3a.75.75 0 0 1 0-1.5Z"/>`,
   prompts: `<path fill-rule="evenodd" d="M1 2.75C1 1.78 1.78 1 2.75 1h10.5c.97 0 1.75.78 1.75 1.75v7.5A1.75 1.75 0 0 1 13.25 12H9.06l-2.57 2.57A1.46 1.46 0 0 1 4 13.54V12H2.75A1.75 1.75 0 0 1 1 10.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .14.11.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.75.75 0 0 1 .53-.22h4.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"/>`,
@@ -156,7 +144,15 @@ const renderClaudeCard = (stats, options = {}) => {
     `Best streak: ${stats.longestStreak}d`,
   ].filter(Boolean);
 
+  // The mascot is wider than tall, so Card's fixed 16x16 title icon renders it
+  // tiny. Reserve that slot with an empty icon and draw a larger logo in its place
+  // (body coordinates are offset 55px down from the card top).
+  const logo = hide_title
+    ? ""
+    : `<svg class="icon" data-testid="logo" x="23" y="-33" width="20" height="14" viewBox="0 2.5 16 11">${CLAUDE_CODE_LOGO}</svg>`;
+
   const body = `
+    ${logo}
     ${rowsSvg}
     <g class="stagger" style="animation-delay: 900ms" transform="translate(${gridX}, 0)" data-testid="heatmap">
       ${renderHeatmap(stats.heatmap)}
@@ -174,7 +170,7 @@ const renderClaudeCard = (stats, options = {}) => {
     border_radius,
     customTitle: custom_title,
     defaultTitle: "Claude Code Stats",
-    titlePrefixIcon: icons.spark,
+    titlePrefixIcon: "<g/>",
     colors: { titleColor, textColor, iconColor, bgColor, borderColor },
   });
 

@@ -49,7 +49,7 @@ Adding a card: a fetcher in `src/fetchers/`, a renderer in `src/cards/`, an endp
 
 # Claude Code Stats Card
 
-Shows my Claude Code usage: tokens used, sessions, prompts sent, tool calls, active days, a 12-week activity heatmap, top model and best streak, with the Claude spark logo in Claude orange (`#D97757`).
+Shows my Claude Code usage: tokens used, sessions, prompts sent, tool calls, active days, a 12-week activity heatmap, top model and best streak, with the Claude Code pixel mascot logo and Claude-orange accents (`#D97757`).
 
 The usage only exists on my PC (Claude Code session logs in `~/.claude/projects`), so a SessionStart hook (`~/.claude/hooks/claude-stats-monthly.ps1`) runs once per calendar month, the first time Claude Code opens that month. It runs `claude-stats/compute.mjs` in the private [Claude-Routines](https://github.com/AbdulDevHub/Claude-Routines) repo and pushes the resulting `stats.json`. The card reads that file through the GitHub API with the `PAT_*` tokens, so a token needs read access to that repo.
 
